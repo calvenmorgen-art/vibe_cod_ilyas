@@ -1,0 +1,1016 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>كود عربية — تعلم البرمجة</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap');
+
+    :root {
+      --navy: #263e5b;
+      --ink: #1f2b3d;
+      --mint: #38bfae;
+      --coral: #e7775e;
+      --cream: #f8f1e7;
+      --paper: #fffdf9;
+      --line: #e6ddd1;
+      --muted: #7a7f89;
+      --shadow: 0 16px 35px #29344b12;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: "IBM Plex Sans Arabic", sans-serif;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+      border: 0;
+    }
+
+    .app {
+      min-height: 100vh;
+      display: flex;
+    }
+
+    .sidebar {
+      width: 270px;
+      background: var(--navy);
+      color: #fff;
+      padding: 28px 18px;
+      position: fixed;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      z-index: 5;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0 10px 34px;
+    }
+
+    .brand-mark {
+      width: 43px;
+      height: 43px;
+      border-radius: 50%;
+      background: var(--mint);
+      display: grid;
+      place-items: center;
+      color: var(--navy);
+      font-weight: 700;
+      font-size: 21px;
+    }
+
+    .brand strong {
+      display: block;
+      font-size: 18px;
+    }
+
+    .brand small {
+      color: #cbd5df;
+    }
+
+    .nav-label {
+      font-size: 12px;
+      color: #aab8c8;
+      margin: 8px 13px 9px;
+    }
+
+    .nav {
+      display: grid;
+      gap: 6px;
+    }
+
+    .nav button {
+      background: transparent;
+      color: #d7e0e8;
+      text-align: right;
+      padding: 13px 14px;
+      border-radius: 28px;
+      display: flex;
+      gap: 11px;
+      align-items: center;
+      font-size: 15px;
+    }
+
+    .nav button:hover,
+    .nav button.active {
+      background: var(--mint);
+      color: var(--navy);
+      font-weight: 700;
+    }
+
+    .nav .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--coral);
+      margin-right: auto;
+    }
+
+    main {
+      width: calc(100% - 270px);
+      margin-right: 270px;
+    }
+
+    .topbar {
+      height: 76px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 42px;
+      background: #fbf5edcc;
+    }
+
+    .topbar .streak {
+      background: #f7dfd6;
+      border-radius: 30px;
+      padding: 8px 15px;
+      color: #784d46;
+      font-weight: 600;
+    }
+
+    .page {
+      max-width: 1100px;
+      margin: auto;
+      padding: 40px 34px 80px;
+    }
+
+    .hero {
+      border-radius: 25px;
+      background: var(--navy);
+      color: #fff;
+      padding: 43px 46px;
+      position: relative;
+      overflow: hidden;
+      min-height: 280px;
+    }
+
+    .hero:before,
+    .hero:after {
+      content: "";
+      position: absolute;
+      border: 28px solid #ffffff0d;
+      border-radius: 50%;
+      width: 240px;
+      height: 240px;
+    }
+
+    .hero:before {
+      left: -110px;
+      top: -160px;
+    }
+
+    .hero:after {
+      left: 35%;
+      bottom: -220px;
+    }
+
+    .hero > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      color: #67dacb;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .hero h1 {
+      font-size: 40px;
+      line-height: 1.3;
+      max-width: 500px;
+      margin: 14px 0 9px;
+    }
+
+    .hero p {
+      color: #c7d1dc;
+      max-width: 480px;
+      margin: 0 0 28px;
+    }
+
+    .primary {
+      background: var(--mint);
+      color: var(--navy);
+      font-weight: 700;
+      padding: 13px 23px;
+      border-radius: 25px;
+    }
+
+    .secondary {
+      background: transparent;
+      border: 1px solid var(--line);
+      color: var(--ink);
+      padding: 11px 18px;
+      border-radius: 23px;
+    }
+
+    .hero .primary {
+      display: inline-flex;
+      gap: 10px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin: 36px 0;
+    }
+
+    .stat,
+    .card,
+    .lesson-box {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 19px;
+      box-shadow: var(--shadow);
+    }
+
+    .stat {
+      padding: 22px 25px;
+    }
+
+    .stat b {
+      font-size: 28px;
+      display: block;
+    }
+
+    .stat span {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 34px 0 15px;
+    }
+
+    .section-head h2 {
+      font-size: 21px;
+      margin: 0;
+    }
+
+    .link {
+      color: #2d9e95;
+      background: none;
+      font-weight: 700;
+    }
+
+    .continue {
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .course-icon {
+      width: 61px;
+      height: 61px;
+      border-radius: 18px;
+      background: #d8f1ea;
+      color: #24998b;
+      display: grid;
+      place-items: center;
+      font-family: "IBM Plex Mono";
+      font-weight: 600;
+      font-size: 19px;
+    }
+
+    .continue .grow {
+      flex: 1;
+    }
+
+    .continue h3 {
+      margin: 2px 0 5px;
+    }
+
+    .continue p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .progress {
+      height: 8px;
+      background: #e8e4dd;
+      border-radius: 20px;
+      overflow: hidden;
+      margin-top: 12px;
+    }
+
+    .progress i {
+      display: block;
+      background: var(--mint);
+      height: 100%;
+      border-radius: 20px;
+    }
+
+    .course-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .course {
+      overflow: hidden;
+    }
+
+    .course-top {
+      padding: 26px;
+      min-height: 140px;
+      position: relative;
+    }
+
+    .course:nth-child(1) .course-top {
+      background: #d9f0e9;
+    }
+
+    .course:nth-child(2) .course-top {
+      background: #f9dbcf;
+    }
+
+    .course:nth-child(3) .course-top {
+      background: #dfe7f3;
+    }
+
+    .course-top .course-icon {
+      background: #ffffff88;
+    }
+
+    .course-top .level {
+      position: absolute;
+      left: 18px;
+      top: 19px;
+      background: #fff9;
+      padding: 6px 10px;
+      border-radius: 18px;
+      font-size: 12px;
+    }
+
+    .course-body {
+      padding: 20px;
+    }
+
+    .course h3 {
+      margin: 0 0 8px;
+    }
+
+    .course p {
+      color: var(--muted);
+      font-size: 14px;
+      min-height: 43px;
+    }
+
+    .course-meta {
+      display: flex;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: 13px;
+      border-top: 1px solid var(--line);
+      padding-top: 15px;
+    }
+
+    .course .secondary {
+      margin-top: 15px;
+      width: 100%;
+    }
+
+    .filters {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 18px 0;
+    }
+
+    .filters input {
+      border: 1px solid var(--line);
+      background: var(--paper);
+      padding: 12px 17px;
+      border-radius: 24px;
+      outline: none;
+      min-width: 230px;
+    }
+
+    .filter {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      padding: 10px 15px;
+      border-radius: 22px;
+      color: var(--muted);
+    }
+
+    .filter.active {
+      background: var(--navy);
+      color: #fff;
+    }
+
+    .lesson-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 26px;
+    }
+
+    .lesson-head h1 {
+      margin: 8px 0;
+      font-size: 29px;
+    }
+
+    .back {
+      background: none;
+      color: #299b90;
+      font-weight: 700;
+    }
+
+    .lesson-layout {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 19px;
+    }
+
+    .lesson-box {
+      overflow: hidden;
+    }
+
+    .tabs {
+      display: flex;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .tabs button {
+      background: transparent;
+      color: var(--muted);
+      padding: 17px 24px;
+      flex: 1;
+    }
+
+    .tabs button.active {
+      background: var(--navy);
+      color: #fff;
+      border-radius: 0 0 15px 15px;
+    }
+
+    .lesson-content {
+      padding: 27px;
+    }
+
+    .lesson-content h2 {
+      font-size: 23px;
+    }
+
+    .lesson-content p {
+      line-height: 2;
+      color: #68717e;
+    }
+
+    .tip {
+      background: #faeae4;
+      border-right: 4px solid var(--coral);
+      padding: 15px 18px;
+      border-radius: 16px;
+      margin: 25px 0;
+    }
+
+    .steps {
+      display: grid;
+      gap: 8px;
+      margin-top: 22px;
+    }
+
+    .step {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 15px;
+      border-radius: 24px;
+      background: #eeece5;
+    }
+
+    .step.done {
+      background: #e7e3d9;
+    }
+
+    .step span {
+      border-radius: 50%;
+      background: #d7d3c8;
+      width: 25px;
+      height: 25px;
+      display: grid;
+      place-items: center;
+      font-size: 12px;
+    }
+
+    .step.done span {
+      background: var(--mint);
+      color: #fff;
+    }
+
+    .editor {
+      background: #182536;
+      padding: 20px;
+    }
+
+    .editor label {
+      color: #b5c0ce;
+      display: block;
+      margin-bottom: 12px;
+    }
+
+    .editor textarea {
+      width: 100%;
+      min-height: 230px;
+      resize: vertical;
+      direction: ltr;
+      text-align: left;
+      color: #e7edf5;
+      background: #111b29;
+      border: 1px solid #34455b;
+      border-radius: 12px;
+      padding: 16px;
+      font: 14px/1.65 "IBM Plex Mono", monospace;
+      outline: none;
+    }
+
+    .editor-actions {
+      display: flex;
+      gap: 9px;
+      margin: 14px 0;
+    }
+
+    .run {
+      background: var(--mint);
+      color: var(--navy);
+      padding: 9px 15px;
+      border-radius: 20px;
+      font-weight: 700;
+    }
+
+    .reset {
+      background: #ffffff12;
+      color: #d8e0e8;
+      padding: 9px 15px;
+      border-radius: 20px;
+    }
+
+    .preview {
+      background: #fff;
+      padding: 18px;
+      border-radius: 12px;
+      min-height: 85px;
+      color: #25364b;
+    }
+
+    .quiz-option {
+      display: block;
+      width: 100%;
+      text-align: right;
+      background: #f0ede6;
+      margin: 9px 0;
+      padding: 13px 16px;
+      border-radius: 13px;
+      color: var(--ink);
+    }
+
+    .quiz-option.correct {
+      background: #d9f1e8;
+      color: #217e70;
+    }
+
+    .quiz-option.wrong {
+      background: #f9ddd4;
+      color: #a14f43;
+    }
+
+    .message {
+      margin-top: 14px;
+      font-weight: 600;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .profile {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .achievement {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      padding: 20px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .achievement:last-child {
+      border: 0;
+    }
+
+    .achievement .badge {
+      width: 43px;
+      height: 43px;
+      border-radius: 14px;
+      background: #f8ded5;
+      display: grid;
+      place-items: center;
+      color: var(--coral);
+      font-weight: 700;
+    }
+
+    .mobile-menu {
+      display: none;
+      background: none;
+      font-size: 25px;
+    }
+
+    @media (max-width: 900px) {
+      .sidebar {
+        width: 230px;
+      }
+
+      .topbar {
+        padding: 0 25px;
+      }
+
+      main {
+        width: calc(100% - 230px);
+        margin-right: 230px;
+      }
+
+      .page {
+        padding: 28px 22px 60px;
+      }
+
+      .course-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .lesson-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 32px;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .app {
+        display: block;
+      }
+
+      .sidebar {
+        display: none;
+      }
+
+      main {
+        width: 100%;
+        margin: 0;
+      }
+
+      .topbar {
+        height: 68px;
+        padding: 0 19px;
+      }
+
+      .mobile-menu {
+        display: block;
+      }
+
+      .page {
+        padding: 22px 16px 50px;
+      }
+
+      .hero {
+        padding: 30px 24px;
+        min-height: 300px;
+      }
+
+      .hero h1 {
+        font-size: 29px;
+      }
+
+      .stats {
+        gap: 8px;
+        margin: 22px 0;
+      }
+
+      .stat {
+        padding: 16px 11px;
+        text-align: center;
+      }
+
+      .stat b {
+        font-size: 22px;
+      }
+
+      .stat span {
+        font-size: 12px;
+      }
+
+      .course-grid,
+      .profile {
+        grid-template-columns: 1fr;
+      }
+
+      .continue {
+        display: block;
+      }
+
+      .continue .primary {
+        margin-top: 16px;
+      }
+
+      .lesson-head {
+        display: block;
+      }
+
+      .lesson-head h1 {
+        font-size: 24px;
+      }
+
+      .lesson-content {
+        padding: 21px 18px;
+      }
+
+      .tabs button {
+        padding: 14px 8px;
+      }
+
+      .lesson-head .back {
+        margin-bottom: 18px;
+      }
+
+      .course-grid {
+        gap: 12px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">&lt;/&gt;</div>
+        <div>
+          <strong>كود عربية</strong>
+          <small>تعلّم. طبّق. تقدّم.</small>
+        </div>
+      </div>
+
+      <div class="nav-label">مساحتك</div>
+
+      <nav class="nav">
+        <button data-page="home" class="active">
+          نظرة عامة <span>⌂</span><i class="dot"></i>
+        </button>
+
+        <button data-page="courses">
+          المسارات التعليمية <span>▦</span>
+        </button>
+
+        <button data-page="lesson">
+          دروسي الحالية <span>▣</span>
+        </button>
+
+        <button data-page="profile">
+          ملفي وإنجازاتي <span>♜</span>
+        </button>
+      </nav>
+    </aside>
+
+    <main>
+      <header class="topbar">
+        <button class="mobile-menu" onclick="toggleMenu()">☰</button>
+        <span>نظرة عامة</span>
+        <span class="streak">4 أيام متتالية</span>
+      </header>
+
+      <div class="page">
+        <section id="home" class="screen">
+          <div class="hero">
+            <div class="eyebrow">الثلاثاء، ٢١ مايو ٢٠٢٤</div>
+
+            <h1>أهلًا،مستعد نبني شيئًا اليوم؟</h1>
+
+            <p>
+              أفضل وقت لتعلم البرمجة هو الآن.
+              درس صغير واحد يكفي لتحافظ على إيقاعك.
+            </p>
+
+            <button class="primary" onclick="showPage('lesson')">
+              متابعة الدرس ←
+            </button>
+          </div>
+
+          <div class="stats">
+            <div class="stat">
+              <b>١٢</b>
+              <span>درسًا مكتملًا</span>
+            </div>
+
+            <div class="stat">
+              <b>٨.٥</b>
+              <span>ساعة تعلم</span>
+            </div>
+
+            <div class="stat">
+              <b>٤</b>
+              <span>أيام متتالية</span>
+            </div>
+          </div>
+
+          <div class="section-head">
+            <h2>تابع من حيث توقفتِ</h2>
+            <button class="link" onclick="showPage('lesson')">
+              كل دروسي ←
+            </button>
+          </div>
+
+          <div class="card continue">
+            <div class="course-icon">&lt;/&gt;</div>
+
+            <div class="grow">
+              <small style="color:#299b90;font-weight:700">
+                المسار الحالي · الدرس ٣ من ١٢
+              </small>
+
+              <h3>أساسيات HTML</h3>
+
+              <p>
+                العناوين والفقرات — كيف تجعل المحتوى واضحًا؟
+              </p>
+
+              <div class="progress">
+                <i style="width:42%"></i>
+              </div>
+            </div>
+
+            <button class="primary" onclick="showPage('lesson')">
+              متابعة
+            </button>
+          </div>
+
+          <div class="section-head">
+            <h2>مسارات مقترحة لك</h2>
+            <button class="link" onclick="showPage('courses')">
+              عرض الكل ←
+            </button>
+          </div>
+
+          <div class="course-grid">
+            <article class="card course">
+              <div class="course-top">
+                <div class="course-icon">&lt;/&gt;</div>
+                <span class="level">ابدئ هنا</span>
+              </div>
+
+              <div class="course-body">
+                <h3>أساسيات HTML</h3>
+                <p>ابني أول صفحة ويب من الصفر.</p>
+
+                <div class="course-meta">
+                  <span>١٢ درسًا</span>
+                  <span>مبتدئ</span>
+                </div>
+
+                <button class="secondary" onclick="showPage('lesson')">
+                  ابدئ المسار
+                </button>
+              </div>
+            </article>
+
+            <article class="card course">
+              <div class="course-top">
+                <div class="course-icon">{ }</div>
+                <span class="level">المسار التالي</span>
+              </div>
+
+              <div class="course-body">
+                <h3>CSS للمبتدئين</h3>
+                <p>أضيف الحياة والألوان إلى صفحاتك.</p>
+
+                <div class="course-meta">
+                  <span>١٨ درسًا</span>
+                  <span>مبتدئ</span>
+                </div>
+
+                <button class="secondary" onclick="showPage('courses')">
+                  استكشاف
+                </button>
+              </div>
+            </article>
+
+            <article class="card course">
+              <div class="course-top">
+                <div class="course-icon">JS</div>
+                <span class="level">تحدٍ جديد</span>
+              </div>
+
+              <div class="course-body">
+                <h3>JavaScript</h3>
+                <p>اجعل صفحاتك تفاعلية وذكية.</p>
+
+                <div class="course-meta">
+                  <span>٢٤ درسًا</span>
+                  <span>متوسط</span>
+                </div>
+
+                <button class="secondary" onclick="showPage('courses')">
+                  استكشاف
+                </button>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section id="courses" class="screen hidden">
+          <div class="section-head">
+            <div>
+              <small class="eyebrow">تعلمي بالوتيرة التي تناسبك</small>
+              <h2>المسارات التعليمية</h2>
+            </div>
+          </div>
+
+          <div class="filters">
+            <input
+              id="search"
+              placeholder="ابحث عن مسار..."
+              oninput="filterCourses()"
+            />
+
+            <button class="filter active" onclick="setFilter(this,'all')">
+              الكل
+            </button>
+
+            <button class="filter" onclick="setFilter(this,'beginner')">
+              مبتدئ
+            </button>
+
+            <button class="filter" onclick="setFilter(this,'middle')">
+              متوسط
+            </button>
+          </div>
+
+          <div class="course-grid" id="all-courses"></div>
+        </section>
+
+        <section id="lesson" class="screen hidden">
+          <div class="lesson-head">
+            <button class="back" onclick="showPage('home')">
+              → كل المسارات
+            </button>
+
+            <div>
+              <small class="eyebrow">
+                الدرس ٣ من ١٢ · HTML
+              </small>
+
+              <h1>بنية الصفحة: أول سطر كود لك</h1>
+
+              <div class="progress" style="width:220px">
+                <i style="width:42%"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="lesson-layout">
+            <article class="lesson-box">
+              <div class="tabs">
+                <button class="active" onclick="tab(this,'explain')">
+                  شرح
+                </button>
+
+                <button onclick="tab(this,'practice')">
+                  تطبيق
+                </button>
+
+                <button onclick="tab(this,'quiz')">
+                  اختبار
+                </button>
+              </div>
